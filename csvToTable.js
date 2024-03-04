@@ -64,8 +64,19 @@ function sortColumn(columnIndex) {
     }
 
     csvArray.sort((a, b) => {
-        const valueA = a[columnIndex].toLowerCase(); // Assuming string comparison, adjust if necessary
-        const valueB = b[columnIndex].toLowerCase();
+        let valueA = a[columnIndex];
+        let valueB = b[columnIndex];
+
+        // Check if the values are numeric and convert them if they are
+        if (!isNaN(valueA) && !isNaN(valueB)) {
+            valueA = parseFloat(valueA);
+            valueB = parseFloat(valueB);
+        } else {
+            // If values are not numeric, compare them as lowercase strings to ensure case-insensitive comparison
+            valueA = valueA.toLowerCase();
+            valueB = valueB.toLowerCase();
+        }
+
         if (valueA < valueB) return sortDirection === 'asc' ? -1 : 1;
         if (valueA > valueB) return sortDirection === 'asc' ? 1 : -1;
         return 0;
@@ -73,6 +84,7 @@ function sortColumn(columnIndex) {
 
     displayPage();
 }
+
 
 function navigate(direction) {
     const totalPages = Math.ceil(csvArray.length / linesPerPage);
