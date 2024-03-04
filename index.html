@@ -14,8 +14,6 @@
 		table {
 			background-color: #BBDEFB; /* Light blue background for the table */
 			border-collapse: collapse;
-			border-radius: 10px; /* Rounded corners for the table */
-			overflow: hidden; /* Ensures the rounded corners affect inner elements */
 		}
 		th, td {
 			border: 1px solid #90CAF9; /* Border color */
@@ -24,13 +22,25 @@
 		th, td:first-child {
 			background-color: #0D47A1; /* Dark blue background for the first column and headers */
 			color: white; /* White text color */
-			border-radius: 10px 0 0 10px; /* Rounded corners for the first column */
+		}
+		/* Specific corner rounding */
+		th:first-child {
+			border-top-left-radius: 10px;
+		}
+		tr:last-child td:first-child {
+			border-bottom-left-radius: 10px;
+		}
+		th:last-child {
+			border-top-right-radius: 10px;
+		}
+		tr:last-child td:last-child {
+			border-bottom-right-radius: 10px;
 		}
 		tr:nth-child(odd) {
 			background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
 		}
 		.nav-arrows button, #linesToShow {
-			background-color: #FFCCBC; /* Light orange background for buttons and dropdown */
+			background-color: #FFCCBC; /* Background color for buttons and dropdown */
 			border: none;
 			padding: 10px 20px;
 			margin: 5px;
@@ -44,6 +54,7 @@
 			margin: 10px;
 		}
 	</style>
+
 
 </head>
 <body>
