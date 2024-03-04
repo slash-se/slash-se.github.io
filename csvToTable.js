@@ -1,8 +1,9 @@
 let currentPage = 1;
 let linesPerPage = 10;
 let csvArray = [];
-let sortDirection = 'asc'; // Tracks the current sort direction
-let currentSortColumn = null; // Tracks the currently sorted column
+let headers = []; // Separately store headers
+let sortDirection = 'asc';
+let currentSortColumn = null;
 
 document.getElementById('linesToShow').addEventListener('change', function () {
     linesPerPage = parseInt(this.value);
@@ -17,20 +18,22 @@ function loadDataFromGoogleSheets() {
         .then(response => response.text())
         .then(csv => {
             const allRows = csv.split(/\r\n|\n/).map(line => line.split(','));
-            csvArray = allRows.slice(1); // Skip header row for sorting data
-            displayPage(allRows[0]); // Pass headers for initial display
+            headers = allRows[0]; // Store headers
+            csvArray = allRows.slice(1); // Exclude header from data
+            displayPage();
         })
         .catch(error => console.error('Error loading the Google Sheets data:', error));
 }
 
-function displayPage(headers) {
+function displayPage() {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
-    
-    // Create headers
     headers.forEach((header, index) => {
         const headerCell = document.createElement('th');
         headerCell.textContent = header;
+        if (index === currentSortColumn) {
+            headerCell.textContent += sortDirection === 'asc' ? ' ↑' : ' ↓';
+        }
         headerCell.onclick = () => sortColumn(index);
         headerRow.appendChild(headerCell);
     });
@@ -54,7 +57,6 @@ function displayPage(headers) {
 
 function sortColumn(columnIndex) {
     if (columnIndex === currentSortColumn) {
-        // Toggle sort direction
         sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
         sortDirection = 'asc';
@@ -62,15 +64,14 @@ function sortColumn(columnIndex) {
     }
 
     csvArray.sort((a, b) => {
-        const valueA = a[columnIndex];
-        const valueB = b[columnIndex];
-
+        const valueA = a[columnIndex].toLowerCase(); // Assuming string comparison, adjust if necessary
+        const valueB = b[columnIndex].toLowerCase();
         if (valueA < valueB) return sortDirection === 'asc' ? -1 : 1;
         if (valueA > valueB) return sortDirection === 'asc' ? 1 : -1;
         return 0;
     });
 
-    displayPage(csvArray[0]); // Re-display the page with sorted data
+    displayPage();
 }
 
 function navigate(direction) {
@@ -78,5 +79,5 @@ function navigate(direction) {
     currentPage += direction;
     if (currentPage < 1) currentPage = 1;
     if (currentPage > totalPages) currentPage = totalPages;
-    displayPage(csvArray[0]);
+    displayPage();
 }
