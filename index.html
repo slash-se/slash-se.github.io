@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Google Sheets to Table</title>
-    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+    <!-- Updated link for Pridi font with Medium (500) for headers and Light (300) for other text -->
+    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@300;500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport tag -->
     <style>
         body {
@@ -12,7 +13,8 @@
             flex-direction: column;
             align-items: center;
             background-color: #FFF9C4; /* Light yellow background */
-            font-family: 'Carter One', cursive; /* Apply Carter One font */
+            font-family: 'Pridi', serif; /* Apply Pridi font */
+            font-weight: 300; /* Light style for general text */
         }
 
         table {
@@ -25,9 +27,15 @@
             border: 1px solid #90CAF9; /* Border color */
             padding: 10px;
         }
-        th, td:first-child {
-            background-color: #0D47A1; /* Dark blue background for the first column and headers */
+        th {
+            background-color: #0D47A1; /* Dark blue background for headers */
             color: white; /* White text color */
+            font-weight: 500; /* Medium style for headers */
+        }
+        td:first-child {
+            background-color: #0D47A1; /* Dark blue background for the first column */
+            color: white; /* White text color */
+            /* Inherits Light style from body */
         }
         /* Specific corner rounding */
         th:first-child {
@@ -52,6 +60,7 @@
             margin: 5px;
             border-radius: 5px; /* Rounded corners for buttons and dropdown */
             cursor: pointer;
+            font-weight: 300; /* Light style for button text */
         }
         .nav-arrows button:hover, #linesToShow:hover {
             background-color: #FFAB91; /* Darker shade on hover */
@@ -63,13 +72,13 @@
         /* Responsive scaling */
         @media (max-width: 768px) {
             html {
-                font-size: 120%; /* Scale up font size to 120% on smaller screens */
+                font-size: 120%; /* Adjust font size for medium screens */
             }
         }
 
         @media (max-width: 480px) {
             html {
-                font-size: 120%; /* Scale up font size to 150% on very small screens */
+                font-size: 150%; /* Adjust font size for small screens */
             }
         }
     </style>
