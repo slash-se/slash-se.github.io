@@ -12,18 +12,19 @@
 			background-color: #FFF9C4; /* Light yellow background */
 		}
 		table {
-			background-color: #BBDEFB; /* Light blue background */
+			background-color: #BBDEFB; /* Light blue background for the table */
+			border-collapse: collapse;
 			border-radius: 10px; /* Rounded corners for the table */
 			overflow: hidden; /* Ensures the rounded corners affect inner elements */
 		}
 		th, td {
-			border: 1px solid #90CAF9; /* Lighter blue border for table cells */
+			border: 1px solid #90CAF9; /* Border color */
 			padding: 10px;
 		}
-		th {
-			background-color: #1976D2; /* Dark blue background */
-			color: white; /* White font color */
-			border: 1px solid #1565C0; /* Slightly darker blue border for distinction */
+		th, td:first-child {
+			background-color: #0D47A1; /* Dark blue background for the first column and headers */
+			color: white; /* White text color */
+			border-radius: 10px 0 0 10px; /* Rounded corners for the first column */
 		}
 		tr:nth-child(odd) {
 			background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
@@ -43,8 +44,6 @@
 			margin: 10px;
 		}
 	</style>
-
-
 
 </head>
 <body>
