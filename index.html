@@ -3,63 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Google Sheets to Table</title>
-	<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
-	<style>
-		body {
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			align-items: center;
-			background-color: #FFF9C4; /* Light yellow background */
-			font-family: 'Carter One', cursive; /* Apply Carter One font */
-		}
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport tag -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FFF9C4; /* Light yellow background */
+            font-family: 'Carter One', cursive; /* Apply Carter One font */
+        }
 
-		table {
-			background-color: #BBDEFB; /* Light blue background for the table */
-			border-collapse: collapse;
-		}
-		th, td {
-			border: 1px solid #90CAF9; /* Border color */
-			padding: 10px;
-		}
-		th, td:first-child {
-			background-color: #0D47A1; /* Dark blue background for the first column and headers */
-			color: white; /* White text color */
-		}
-		/* Specific corner rounding */
-		th:first-child {
-			border-top-left-radius: 10px;
-		}
-		tr:last-child td:first-child {
-			border-bottom-left-radius: 10px;
-		}
-		th:last-child {
-			border-top-right-radius: 10px;
-		}
-		tr:last-child td:last-child {
-			border-bottom-right-radius: 10px;
-		}
-		tr:nth-child(odd) {
-			background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
-		}
-		.nav-arrows button, #linesToShow {
-			background-color: #FFCCBC; /* Background color for buttons and dropdown */
-			border: none;
-			padding: 10px 20px;
-			margin: 5px;
-			border-radius: 5px; /* Rounded corners for buttons and dropdown */
-			cursor: pointer;
-		}
-		.nav-arrows button:hover, #linesToShow:hover {
-			background-color: #FFAB91; /* Darker shade on hover */
-		}
-		.nav-arrows, #linesToShow {
-			margin: 10px;
-		}
-	</style>
+        table {
+            background-color: #BBDEFB; /* Light blue background for the table */
+            border-collapse: collapse;
+            width: 100%; /* Ensure table width is responsive */
+            max-width: 600px; /* Maximum table width */
+        }
+        th, td {
+            border: 1px solid #90CAF9; /* Border color */
+            padding: 10px;
+        }
+        th, td:first-child {
+            background-color: #0D47A1; /* Dark blue background for the first column and headers */
+            color: white; /* White text color */
+        }
+        /* Specific corner rounding */
+        th:first-child {
+            border-top-left-radius: 10px;
+        }
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+        th:last-child {
+            border-top-right-radius: 10px;
+        }
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+        tr:nth-child(odd) {
+            background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
+        }
+        .nav-arrows button, #linesToShow {
+            background-color: #FFCCBC; /* Background color for buttons and dropdown */
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px; /* Rounded corners for buttons and dropdown */
+            cursor: pointer;
+        }
+        .nav-arrows button:hover, #linesToShow:hover {
+            background-color: #FFAB91; /* Darker shade on hover */
+        }
+        .nav-arrows, #linesToShow {
+            margin: 10px;
+        }
 
+        /* Responsive scaling */
+        @media (max-width: 768px) {
+            html {
+                font-size: 120%; /* Scale up font size to 120% on smaller screens */
+            }
+        }
 
+        @media (max-width: 480px) {
+            html {
+                font-size: 150%; /* Scale up font size to 150% on very small screens */
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <select id="linesToShow">
