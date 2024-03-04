@@ -28,25 +28,17 @@ function loadDataFromGoogleSheets() {
 function displayPage() {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
-    const columnsToHide = ['Link', 'Timestamp']; // Names of the columns to hide
-
-    // Function to check if a column should be hidden
-    const shouldHideColumn = (header) => columnsToHide.includes(header);
-
-    // Filtered indexes of columns to hide
-    const indexesToHide = headers.reduce((acc, header, index) => {
-        if (shouldHideColumn(header)) acc.push(index);
-        return acc;
-    }, []);
+    const staticHeaderCell = document.createElement('th');
+    staticHeaderCell.textContent = "#"; // Label for the static numbered column
+    headerRow.appendChild(staticHeaderCell);
 
     headers.forEach((header, index) => {
-        if (!shouldHideColumn(header)) { // Only add header if it's not in the list of columns to hide
+        if (!shouldHideColumn(header)) {
             const headerCell = document.createElement('th');
             headerCell.textContent = header;
             if (index === currentSortColumn) {
                 headerCell.textContent += sortDirection === 'asc' ? ' ↑' : ' ↓';
             }
-            headerCell.onclick = () => sortColumn(index);
             headerRow.appendChild(headerCell);
         }
     });
@@ -54,10 +46,15 @@ function displayPage() {
 
     const startIndex = (currentPage - 1) * linesPerPage;
     const endIndex = startIndex + linesPerPage;
-    csvArray.slice(startIndex, endIndex).forEach(row => {
+    csvArray.slice(startIndex, endIndex).forEach((row, rowIndex) => {
         const rowElement = document.createElement('tr');
+        // Add static numbered cell at the beginning of each row
+        const numberCell = document.createElement('td');
+        numberCell.textContent = startIndex + rowIndex + 1; // Row number, adjusted by currentPage and startIndex
+        rowElement.appendChild(numberCell);
+
         row.forEach((cell, index) => {
-            if (!indexesToHide.includes(index)) { // Only add cell if its column is not to be hidden
+            if (!indexesToHide.includes(index)) {
                 const cellElement = document.createElement('td');
                 cellElement.textContent = cell;
                 rowElement.appendChild(cellElement);
@@ -69,6 +66,7 @@ function displayPage() {
     document.getElementById('csvRoot').innerHTML = '';
     document.getElementById('csvRoot').appendChild(table);
 }
+
 
 
 function sortColumn(columnIndex) {
