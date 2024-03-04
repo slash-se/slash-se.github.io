@@ -109,3 +109,7 @@ function navigate(direction) {
     if (currentPage > totalPages) currentPage = totalPages;
     displayPage();
 }
+
+window.onload = function() {
+    loadDataFromGoogleSheets();
+};
