@@ -53,15 +53,16 @@
         tr:nth-child(odd) {
             background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
         }
-        .nav-arrows button, #linesToShow {
-            background-color: #FFCCBC; /* Background color for buttons and dropdown */
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px; /* Rounded corners for buttons and dropdown */
-            cursor: pointer;
-            font-weight: 300; /* Light style for button text */
-        }
+		.nav-arrows button, #linesToShow {
+			background-color: #FFCCBC; /* Background color for buttons and dropdown */
+			border: none;
+			padding: 10px 20px;
+			margin: 5px;
+			border-radius: 5px; /* Rounded corners for buttons and dropdown */
+			cursor: pointer;
+			font-weight: 300; /* Light style for button text */
+			font-family: 'Pridi', serif; /* Explicitly set Pridi font for consistency */
+		}
         .nav-arrows button:hover, #linesToShow:hover {
             background-color: #FFAB91; /* Darker shade on hover */
         }
@@ -72,13 +73,13 @@
         /* Responsive scaling */
         @media (max-width: 768px) {
             html {
-                font-size: 120%; /* Adjust font size for medium screens */
+                font-size: 110%; /* Adjust font size for medium screens */
             }
         }
 
         @media (max-width: 480px) {
             html {
-                font-size: 150%; /* Adjust font size for small screens */
+                font-size: 120%; /* Adjust font size for small screens */
             }
         }
     </style>
