@@ -28,17 +28,30 @@ function loadDataFromGoogleSheets() {
 function displayPage() {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
-    const staticHeaderCell = document.createElement('th');
-    staticHeaderCell.textContent = "#"; // Label for the static numbered column
-    headerRow.appendChild(staticHeaderCell);
+    const columnsToHide = ['Link', 'Timestamp']; // Names of the columns to hide
+
+    // Add static header for the numbered column at the beginning
+    const staticNumberHeader = document.createElement('th');
+    staticNumberHeader.textContent = "#";
+    headerRow.appendChild(staticNumberHeader);
+
+    // Function to check if a column should be hidden
+    const shouldHideColumn = (header) => columnsToHide.includes(header);
+
+    // Filtered indexes of columns to hide
+    const indexesToHide = headers.reduce((acc, header, index) => {
+        if (shouldHideColumn(header)) acc.push(index);
+        return acc;
+    }, []);
 
     headers.forEach((header, index) => {
-        if (!shouldHideColumn(header)) {
+        if (!shouldHideColumn(header)) { // Only add header if it's not in the list of columns to hide
             const headerCell = document.createElement('th');
             headerCell.textContent = header;
             if (index === currentSortColumn) {
                 headerCell.textContent += sortDirection === 'asc' ? ' ↑' : ' ↓';
             }
+            headerCell.onclick = () => sortColumn(index);
             headerRow.appendChild(headerCell);
         }
     });
@@ -48,13 +61,14 @@ function displayPage() {
     const endIndex = startIndex + linesPerPage;
     csvArray.slice(startIndex, endIndex).forEach((row, rowIndex) => {
         const rowElement = document.createElement('tr');
-        // Add static numbered cell at the beginning of each row
+
+        // Add a static number cell at the beginning of each row
         const numberCell = document.createElement('td');
-        numberCell.textContent = startIndex + rowIndex + 1; // Row number, adjusted by currentPage and startIndex
+        numberCell.textContent = startIndex + rowIndex + 1; // Calculate row number
         rowElement.appendChild(numberCell);
 
         row.forEach((cell, index) => {
-            if (!indexesToHide.includes(index)) {
+            if (!indexesToHide.includes(index)) { // Only add cell if its column is not to be hidden
                 const cellElement = document.createElement('td');
                 cellElement.textContent = cell;
                 rowElement.appendChild(cellElement);
