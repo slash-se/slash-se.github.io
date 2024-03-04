@@ -17,39 +17,36 @@
             font-weight: 300; /* Light style for general text */
         }
 
-        table {
-            background-color: #BBDEFB; /* Light blue background for the table */
-            border-collapse: collapse;
-            width: 100%; /* Ensure table width is responsive */
-            max-width: 600px; /* Maximum table width */
-        }
-        th, td {
-            border: 1px solid #90CAF9; /* Border color */
-            padding: 10px;
-        }
-        th {
-            background-color: #0D47A1; /* Dark blue background for headers */
-            color: white; /* White text color */
-            font-weight: 500; /* Medium style for headers */
-        }
-        td:first-child {
-            background-color: #0D47A1; /* Dark blue background for the first column */
-            color: white; /* White text color */
-            /* Inherits Light style from body */
-        }
-        /* Specific corner rounding */
-        th:first-child {
-            border-top-left-radius: 10px;
-        }
-        tr:last-child td:first-child {
-            border-bottom-left-radius: 10px;
-        }
-        th:last-child {
-            border-top-right-radius: 10px;
-        }
-        tr:last-child td:last-child {
-            border-bottom-right-radius: 10px;
-        }
+		table {
+			border-collapse: separate; /* Allows for rounded corners */
+			border-spacing: 0; /* Removes spacing between cells */
+			width: 100%;
+			max-width: 600px; /* Maximum table width */
+			margin-top: 20px;
+			background-color: transparent; /* Makes table background transparent */
+		}
+		th, td {
+			border: 1px solid #90CAF9; /* Border color */
+			padding: 10px;
+			background-color: #BBDEFB; /* Apply background color to cells instead of the table */
+		}
+		th {
+			background-color: #0D47A1; /* Dark blue background for headers */
+			color: white; /* White text color */
+			font-weight: 500; /* Medium style for headers */
+		}
+		td:first-child, th:first-child {
+			border-top-left-radius: 10px; /* Adjust for the first header cell */
+		}
+		tr:last-child td:first-child {
+			border-bottom-left-radius: 10px; /* Adjust for the first cell in the last row */
+		}
+		th:last-child {
+			border-top-right-radius: 10px; /* Adjust for the last header cell */
+		}
+		tr:last-child td:last-child {
+			border-bottom-right-radius: 10px; /* Adjust for the last cell in the last row */
+		}
         tr:nth-child(odd) {
             background-color: #E3F2FD; /* Lighter shade of blue for odd rows */
         }
